@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { TouchableOpacity, Text, FlatList } from "react-native";
 import styles, { windowWidth, windowHeight } from "../styles/styles";
 import NewChord from "./NewChord";
+import { useRoute } from "@react-navigation/native";
 
 const ChordThumbnail = ({ data, navigation }) => {
+    const route = useRoute();
+
     const nameArray = data.enharmonicChordName.split(",");
 
     const styleItem = (index) => {
@@ -37,8 +40,11 @@ const ChordThumbnail = ({ data, navigation }) => {
         );
     };
 
+    const destination =
+        route.name === "Search for chords" ? "Search" : "Favourites";
+
     const handlePress = () => {
-        navigation.navigate("Search", {
+        navigation.navigate(destination, {
             screen: "Chord Details",
             params: data,
         });

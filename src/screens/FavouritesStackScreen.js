@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import ChordList from "../components/ChordList";
+import FavouritesScreen from "../screens/FavouritesScreen";
 import ChordDetails from "../components/ChordDetails";
 
 import { background, font } from "../styles/styles";
@@ -11,7 +11,10 @@ const SearchStackScreen = () => {
 
     return (
         <SearchStack.Navigator screenOptions={options}>
-            <SearchStack.Screen name="Chords to learn" component={ChordList} />
+            <SearchStack.Screen
+                name="Favourite chords"
+                component={FavouritesScreen}
+            />
             <SearchStack.Screen name="Chord Details" component={ChordDetails} />
         </SearchStack.Navigator>
     );

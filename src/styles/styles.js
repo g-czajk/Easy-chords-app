@@ -6,6 +6,7 @@ export const windowHeight = Dimensions.get("window").height;
 export const background = "#14213d";
 export const font = "nunito-regular";
 export const green = "#248232";
+export const red = "#d00000";
 
 const styles = StyleSheet.create({
     container: {
@@ -21,11 +22,11 @@ const styles = StyleSheet.create({
         borderTopColor: "#bbb",
         borderTopWidth: 2,
     },
-    searchScreen: {
+    screen: {
         flex: 1,
     },
     pickerContainer: {
-        flex: 0.12,
+        height: 60,
         flexDirection: "row",
         justifyContent: "center",
         marginBottom: -20,
@@ -112,11 +113,18 @@ const styles = StyleSheet.create({
         transform: [{ translateY: -8 }],
     },
     chordDetailsList: { flexGrow: 0, flexShrink: 0, marginBottom: 10 },
-    toLearn: {
-        marginTop: -3,
+    toFavourites: {
+        marginTop: 8,
         alignItems: "center",
     },
-    toLearnText: { fontFamily: "nunito-bold", fontSize: 16 },
+    toFavouritesText: { fontFamily: "nunito-regular", fontSize: 16 },
+    spinner: {
+        position: "relative",
+        top: "40%",
+        alignSelf: "center",
+    },
+    noFavs: { position: "absolute", top: "40%", alignSelf: "center" },
+    noFavsText: { fontFamily: "nunito-bold", fontSize: 20 },
 });
 
 export default styles;

@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 import SearchStackScreen from "../screens/SearchStackScreen";
-import ToLearnStackScreen from "../screens/ToLearnStackScreen";
+import FavouritesStackScreen from "../screens/FavouritesStackScreen";
 import styles, { font } from "../styles/styles";
 
 const MainNavigation = () => {
@@ -19,8 +19,8 @@ const MainNavigation = () => {
 
                         if (route.name === "Search") {
                             iconName = focused ? "search" : "search-outline";
-                        } else if (route.name === "To learn") {
-                            iconName = focused ? "book" : "book-outline";
+                        } else if (route.name === "Favourites") {
+                            iconName = focused ? "heart" : "heart-outline";
                         }
 
                         return (
@@ -43,7 +43,10 @@ const MainNavigation = () => {
                 }}
             >
                 <Tab.Screen name="Search" component={SearchStackScreen} />
-                <Tab.Screen name="To learn" component={ToLearnStackScreen} />
+                <Tab.Screen
+                    name="Favourites"
+                    component={FavouritesStackScreen}
+                />
             </Tab.Navigator>
         </NavigationContainer>
     );

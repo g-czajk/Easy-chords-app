@@ -15,8 +15,6 @@ const NewChord = ({ data, style }) => {
         else return Number(item);
     });
 
-    const barres = undefined;
-
     // useEffect(() => {
     //     console.log(fingers);
     // }, []);

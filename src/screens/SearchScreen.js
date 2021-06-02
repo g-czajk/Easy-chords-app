@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import { View, Text } from "react-native";
-import styles from "../styles/styles";
+import { View, Text, ActivityIndicator } from "react-native";
+import styles, { background } from "../styles/styles";
 import ChordList from "../components/ChordList";
 import Context from "../context/Context";
 
@@ -9,18 +9,19 @@ import { Picker } from "@react-native-picker/picker";
 const SearchScreen = ({ navigation }) => {
     const [selectedKey, setSelectedKey] = useState("C");
     const [selectedMod, setSelectedMod] = useState("maj");
-    const { data, getData } = useContext(Context);
+
+    const { data, getData, isLoading } = useContext(Context);
 
     useEffect(() => {
         getData(selectedKey, selectedMod);
     }, [selectedKey, selectedMod]);
 
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
+    // useEffect(() => {
+    //     console.log(isLoading);
+    // }, [isLoading]);
 
     return (
-        <View style={styles.searchScreen}>
+        <View style={styles.screen}>
             <View style={styles.pickerContainer}>
                 <Text style={styles.pickerLabel}>key:</Text>
                 <Picker
@@ -58,12 +59,21 @@ const SearchScreen = ({ navigation }) => {
                     <Picker.Item label="aug" value="aug" />
                 </Picker>
             </View>
-            <ChordList
-                selectedKey={selectedKey}
-                selectedMod={selectedMod}
-                navigation={navigation}
-                data={data}
-            />
+            {!isLoading && (
+                <ChordList
+                    selectedKey={selectedKey}
+                    selectedMod={selectedMod}
+                    navigation={navigation}
+                    data={data}
+                />
+            )}
+            {isLoading && (
+                <ActivityIndicator
+                    size="large"
+                    color={background}
+                    style={styles.spinner}
+                />
+            )}
         </View>
     );
 };
