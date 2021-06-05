@@ -4,11 +4,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GlobalState = (props) => {
     const [data, setData] = useState([]);
+    const [lessonsData, setLessonsData] = useState([]);
     const [storageData, setStorageData] = useState([]);
     const [storageKeys, setStorageKeys] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    //API data
+    //API chords data
 
     const getData = async (key, mod) => {
         setIsLoading(true);
@@ -22,7 +23,18 @@ const GlobalState = (props) => {
         setIsLoading(false);
     };
 
-    //storage data
+    // API lessons data
+
+    const getLessonsData = async () => {
+        setIsLoading(true);
+        await fetch("http://192.168.0.15:3000/levels")
+            .then((response) => response.json())
+            .then((data) => setLessonsData(data))
+            .catch((err) => console.log(err));
+        setIsLoading(false);
+    };
+
+    // storage data
 
     const getAllStorageKeys = async () => {
         let keys = [];
@@ -64,12 +76,14 @@ const GlobalState = (props) => {
         <Context.Provider
             value={{
                 data,
+                lessonsData,
                 storageData,
                 storageKeys,
+                isLoading,
                 getData,
+                getLessonsData,
                 getStorageData,
                 setAllStorageKeys,
-                isLoading,
             }}
         >
             {props.children}

@@ -59,14 +59,7 @@ const SearchScreen = ({ navigation }) => {
                     <Picker.Item label="aug" value="aug" />
                 </Picker>
             </View>
-            {!isLoading && (
-                <ChordList
-                    selectedKey={selectedKey}
-                    selectedMod={selectedMod}
-                    navigation={navigation}
-                    data={data}
-                />
-            )}
+            {!isLoading && <ChordList navigation={navigation} data={data} />}
             {isLoading && (
                 <ActivityIndicator
                     size="large"

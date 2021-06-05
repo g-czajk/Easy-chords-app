@@ -5,6 +5,7 @@ export const windowHeight = Dimensions.get("window").height;
 
 export const background = "#14213d";
 export const font = "nunito-regular";
+export const fontBold = "nunito-bold";
 export const green = "#248232";
 export const red = "#d00000";
 
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     },
     pickerLabel: {
         textAlignVertical: "center",
-        fontFamily: "nunito-bold",
+        fontFamily: fontBold,
         fontSize: 18,
         marginRight: 5,
     },
@@ -70,13 +71,13 @@ const styles = StyleSheet.create({
     chordThumbnailList: { flexGrow: 0, flexShrink: 0 },
     chordThumbnailText0: {
         marginBottom: 4,
-        fontFamily: "nunito-bold",
+        fontFamily: fontBold,
         textAlign: "center",
         maxWidth: "120%",
     },
     chordThumbnailText1: {
         marginBottom: 4,
-        fontFamily: "nunito-bold",
+        fontFamily: fontBold,
         textAlign: "center",
         maxWidth: "120%",
         fontSize: 11,
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     },
     chordThumbnailText2: {
         marginBottom: 4,
-        fontFamily: "nunito-bold",
+        fontFamily: fontBold,
         textAlign: "center",
         fontSize: 11,
         maxWidth: "120%",
@@ -98,17 +99,17 @@ const styles = StyleSheet.create({
     chordDetailsText0: {
         marginRight: 2,
         marginBottom: 6,
-        fontFamily: "nunito-bold",
+        fontFamily: fontBold,
         fontSize: 30,
     },
     chordDetailsText1: {
         marginRight: 2,
-        fontFamily: "nunito-bold",
+        fontFamily: fontBold,
         fontSize: 20,
         transform: [{ translateY: 10 }],
     },
     chordDetailsText2: {
-        fontFamily: "nunito-bold",
+        fontFamily: fontBold,
         fontSize: 20,
         transform: [{ translateY: -8 }],
     },
@@ -117,14 +118,60 @@ const styles = StyleSheet.create({
         marginTop: 8,
         alignItems: "center",
     },
-    toFavouritesText: { fontFamily: "nunito-regular", fontSize: 16 },
+    toFavouritesText: { fontFamily: font, fontSize: 16 },
     spinner: {
         position: "relative",
         top: "40%",
         alignSelf: "center",
     },
     noFavs: { position: "absolute", top: "40%", alignSelf: "center" },
-    noFavsText: { fontFamily: "nunito-bold", fontSize: 20 },
+    noFavsText: { fontFamily: fontBold, fontSize: 20 },
+    lessonsCategoryList: {
+        flex: 1,
+        marginTop: 20,
+        paddingRight: 20,
+        paddingLeft: 20,
+    },
+    lessonsCategory: {
+        borderColor: "#ccc",
+        borderBottomWidth: 1,
+    },
+    lessonsCategoryText: {
+        paddingTop: 10,
+        paddingBottom: 4,
+        paddingLeft: 10,
+        fontFamily: font,
+        fontSize: 22,
+        color: background,
+    },
+    lessonsList: {
+        flex: 1,
+        marginTop: 20,
+        paddingRight: 20,
+        paddingLeft: 20,
+    },
+    lessonThumbnail: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        borderColor: "#ccc",
+        borderBottomWidth: 1,
+    },
+    lessonThumbnailName: {
+        paddingTop: 10,
+        paddingBottom: 4,
+        paddingLeft: 10,
+        fontFamily: font,
+        fontSize: 22,
+        color: background,
+    },
+    lessonThumbnailChords: {
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 4,
+        fontFamily: font,
+        fontSize: 22,
+        color: "#999",
+    },
 });
 
 export default styles;

@@ -1,16 +1,12 @@
 import React from "react";
-import { FlatList, View } from "react-native";
+import { FlatList } from "react-native";
 
 import styles from "../styles/styles";
 import ChordThumbnail from "./ChordThumbnail";
 
 const ChordList = ({ data, navigation }) => {
-    const renderItem = ({ item, index }) => (
-        <ChordThumbnail
-            title={item.title}
-            data={data[index]}
-            navigation={navigation}
-        />
+    const renderItem = ({ index }) => (
+        <ChordThumbnail data={data[index]} navigation={navigation} />
     );
 
     return (

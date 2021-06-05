@@ -54,7 +54,7 @@ const ChordDetails = (props) => {
         try {
             const jsonValue = JSON.stringify(data);
             await AsyncStorage.setItem(data.enharmonicChordName, jsonValue);
-            console.log(`${jsonValue} stored as "${data.enharmonicChordName}"`);
+            // console.log(`${jsonValue} stored as "${data.enharmonicChordName}"`);
         } catch (e) {
             console.log(e);
         }
@@ -63,7 +63,7 @@ const ChordDetails = (props) => {
     const removeValue = async (item) => {
         try {
             await AsyncStorage.removeItem(`${item}`);
-            console.log(`${item} removed`);
+            // console.log(`${item} removed`);
         } catch (e) {
             console.log(e);
         }

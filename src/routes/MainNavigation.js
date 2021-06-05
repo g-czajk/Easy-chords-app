@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import SearchStackScreen from "../screens/SearchStackScreen";
 import FavouritesStackScreen from "../screens/FavouritesStackScreen";
+import LearnStackScreen from "../screens/LearnStackScreen";
 import styles, { font } from "../styles/styles";
 
 const MainNavigation = () => {
@@ -21,6 +22,8 @@ const MainNavigation = () => {
                             iconName = focused ? "search" : "search-outline";
                         } else if (route.name === "Favourites") {
                             iconName = focused ? "heart" : "heart-outline";
+                        } else if (route.name === "Learn") {
+                            iconName = focused ? "book" : "book-outline";
                         }
 
                         return (
@@ -47,6 +50,7 @@ const MainNavigation = () => {
                     name="Favourites"
                     component={FavouritesStackScreen}
                 />
+                <Tab.Screen name="Learn" component={LearnStackScreen} />
             </Tab.Navigator>
         </NavigationContainer>
     );

@@ -41,3 +41,6 @@ export default function App() {
         );
     }
 }
+
+// json-server --host 192.168.0.15 lessonsDB.json --port 3000
+// json-server --host 192.168.0.15 chordsDB.json --port 3001

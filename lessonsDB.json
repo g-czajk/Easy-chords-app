@@ -1,0 +1,40 @@
+{
+    "levels": [
+        {
+            "id": 1,
+            "title": "Beginner",
+            "lessons": [
+                {
+                    "id": 1,
+                    "title": "Lesson 1",
+                    "progression": ["Am", "Em"],
+                    "chords": ["Am", "Em"]
+                },
+                {
+                    "id": 2,
+                    "title": "Lesson 2",
+                    "progression": ["Am", "C", "Am", "Em"],
+                    "chords": ["Am", "C", "Em"]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Beginner+",
+            "lessons": [
+                {
+                    "id": 1,
+                    "title": "Lesson 1",
+                    "progression": ["Am", "G"],
+                    "chords": ["Am", "G"]
+                },
+                {
+                    "id": 2,
+                    "title": "Lesson 2",
+                    "progression": ["Am", "G", "C", "Em"],
+                    "chords": ["Am", "G", "C"]
+                }
+            ]
+        }
+    ]
+}
