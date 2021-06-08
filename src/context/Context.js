@@ -6,7 +6,7 @@ const Context = React.createContext({
     storageData: [],
     storageKeys: [],
     isLoading: false,
-    getData: async (key, mod) => {},
+    getData: async (key) => {},
     getLessonsData: async () => {},
     getStorageData: async () => {},
     setAllStorageKeys: async () => {},

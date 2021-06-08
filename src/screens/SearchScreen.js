@@ -1,24 +1,49 @@
 import React, { useEffect, useState, useContext } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    TextInput,
+    ActivityIndicator,
+} from "react-native";
 import styles, { background } from "../styles/styles";
 import ChordList from "../components/ChordList";
 import Context from "../context/Context";
 
 import { Picker } from "@react-native-picker/picker";
+import { Ionicons } from "@expo/vector-icons";
 
 const SearchScreen = ({ navigation }) => {
     const [selectedKey, setSelectedKey] = useState("C");
-    const [selectedMod, setSelectedMod] = useState("maj");
 
-    const { data, getData, isLoading } = useContext(Context);
+    const { data, getData, setAllStorageKeys, isLoading } = useContext(Context);
+    const [filteredData, setFilteredData] = useState(null);
+
+    const [inputValue, setInputValue] = useState("");
+
+    const handleFilter = (value) => {
+        const filteredData = data.filter((chord) =>
+            chord.suffix.toLowerCase().startsWith(value.toLowerCase())
+        );
+        setFilteredData(filteredData);
+    };
+
+    const handleClear = () => {
+        setInputValue("");
+    };
 
     useEffect(() => {
-        getData(selectedKey, selectedMod);
-    }, [selectedKey, selectedMod]);
+        getData(selectedKey);
+        setAllStorageKeys();
+    }, [selectedKey]);
 
-    // useEffect(() => {
-    //     console.log(isLoading);
-    // }, [isLoading]);
+    useEffect(() => {
+        setFilteredData(data);
+    }, [data]);
+
+    useEffect(() => {
+        handleFilter(inputValue);
+    }, [inputValue]);
 
     return (
         <View style={styles.screen}>
@@ -32,34 +57,35 @@ const SearchScreen = ({ navigation }) => {
                     style={styles.picker}
                 >
                     <Picker.Item label="C" value="C" />
-                    <Picker.Item label="C#" value="Db" />
+                    <Picker.Item label="C#" value="Csharp" />
                     <Picker.Item label="D" value="D" />
                     <Picker.Item label="Eb" value="Eb" />
                     <Picker.Item label="E" value="E" />
                     <Picker.Item label="F" value="F" />
-                    <Picker.Item label="F#" value="Gb" />
+                    <Picker.Item label="F#" value="Fsharp" />
                     <Picker.Item label="G" value="G" />
                     <Picker.Item label="Ab" value="Ab" />
                     <Picker.Item label="A" value="A" />
                     <Picker.Item label="Bb" value="Bb" />
                     <Picker.Item label="B" value="B" />
                 </Picker>
-                <Text style={styles.pickerLabel}>mod:</Text>
-                <Picker
-                    selectedValue={selectedMod}
-                    onValueChange={(itemValue, itemIndex) =>
-                        setSelectedMod(itemValue)
-                    }
-                    style={styles.picker}
-                >
-                    <Picker.Item label="Major" value="maj" />
-                    <Picker.Item label="minor" value="m" />
-                    <Picker.Item label="sus" value="sus" />
-                    <Picker.Item label="dim" value="dim" />
-                    <Picker.Item label="aug" value="aug" />
-                </Picker>
+                <TextInput
+                    placeholder="filter (e.g. 'major')"
+                    value={inputValue}
+                    onChangeText={(text) => setInputValue(text)}
+                    style={styles.input}
+                />
+                <TouchableOpacity style={styles.clear} onPress={handleClear}>
+                    <Ionicons
+                        name="close-outline"
+                        size={24}
+                        color={inputValue !== "" ? "#444" : "#bbbbbb00"}
+                    />
+                </TouchableOpacity>
             </View>
-            {!isLoading && <ChordList navigation={navigation} data={data} />}
+            {!isLoading && (
+                <ChordList navigation={navigation} data={filteredData} />
+            )}
             {isLoading && (
                 <ActivityIndicator
                     size="large"

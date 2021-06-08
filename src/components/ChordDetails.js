@@ -1,60 +1,29 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import styles, { windowWidth, windowHeight, red } from "../styles/styles";
+import styles, {
+    windowWidth,
+    windowHeight,
+    red,
+    background,
+} from "../styles/styles";
 import NewChord from "./NewChord";
+import ChordNameComponent from "./ChordNameComponent";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Context from "../context/Context";
 
+import Swiper from "react-native-swiper";
+
 const ChordDetails = (props) => {
-    // chord name styling and rendering
-
-    const nameArray = props.route.params.enharmonicChordName.split(",");
-
-    const styleItem = (index) => {
-        if (index == 0) {
-            return styles.chordDetailsText0;
-        } else if (index == 1) {
-            return styles.chordDetailsText1;
-        } else if (index == 2 || index == 3) {
-            return styles.chordDetailsText2;
-        }
-    };
-
-    const renderItem = ({ item, index }) => {
-        if (item !== "") {
-            return <Text style={styleItem(index)}>{item}</Text>;
-        }
-    };
-
-    const ChordNameComponent = () => {
-        return (
-            <FlatList
-                style={styles.chordDetailsList}
-                data={nameArray}
-                renderItem={renderItem}
-                keyExtractor={(item, index) => index.toString()}
-                horizontal={true}
-                contentContainerStyle={{
-                    alignItems: "center",
-                }}
-            />
-        );
-    };
-
     // storage save/delete
 
     const { storageKeys, setAllStorageKeys } = useContext(Context);
 
-    // useEffect(() => {
-    //     console.log(storageKeys);
-    // }, [storageKeys]);
-
     const saveData = async (data) => {
         try {
             const jsonValue = JSON.stringify(data);
-            await AsyncStorage.setItem(data.enharmonicChordName, jsonValue);
-            // console.log(`${jsonValue} stored as "${data.enharmonicChordName}"`);
+            await AsyncStorage.setItem(`${data.key}${data.suffix}`, jsonValue);
+            // console.log(`${jsonValue} stored as "${data.key}${data.suffix}"`);
         } catch (e) {
             console.log(e);
         }
@@ -85,39 +54,68 @@ const ChordDetails = (props) => {
 
     return (
         <View style={styles.chordDetails}>
-            <ChordNameComponent />
-            <NewChord
-                style={{
-                    width: windowWidth / 1.4,
-                    height: windowHeight / 2.8,
-                }}
-                data={props.route.params}
+            <ChordNameComponent
+                chordKey={props.route.params.key}
+                chordSuffix={props.route.params.suffix}
+                nameComponentStyles={[
+                    styles.chordDetailsChordName,
+                    styles.chordDetailsChordNameKey,
+                    styles.chordDetailsChordNameSuffix,
+                ]}
             />
+            <Swiper
+                containerStyle={{ flex: 0.68 }}
+                style={styles.swiper}
+                showsButtons={true}
+                activeDotColor={background}
+                nextButton={<Text style={styles.buttonText}>›</Text>}
+                prevButton={<Text style={styles.buttonText}>‹</Text>}
+                buttonWrapperStyle={styles.buttonWrapper}
+            >
+                {props.route.params.positions.map((item, index) => (
+                    <View style={styles.slide} key={item.frets.join(",")}>
+                        <NewChord
+                            style={{
+                                width: windowWidth / 1.4,
+                                height: windowHeight / 2.8,
+                            }}
+                            data={props.route.params.positions[index]}
+                        />
+                    </View>
+                ))}
+            </Swiper>
+
             <TouchableOpacity
                 style={styles.toFavourites}
                 onPress={() => {
                     addOrRemoveFav(
                         props.route.params,
-                        props.route.params.enharmonicChordName
+                        `${props.route.params.key}${props.route.params.suffix}`
                     );
                     setAllStorageKeys();
                 }}
             >
                 <Ionicons
                     name={
-                        isFav(props.route.params.enharmonicChordName)
+                        isFav(
+                            `${props.route.params.key}${props.route.params.suffix}`
+                        )
                             ? "heart"
                             : "heart-outline"
                     }
                     size={32}
                     color={
-                        isFav(props.route.params.enharmonicChordName)
+                        isFav(
+                            `${props.route.params.key}${props.route.params.suffix}`
+                        )
                             ? red
                             : "#333"
                     }
                 />
 
-                {isFav(props.route.params.enharmonicChordName) ? (
+                {isFav(
+                    `${props.route.params.key}${props.route.params.suffix}`
+                ) ? (
                     <Text style={styles.toFavouritesText}>
                         added to favourites
                     </Text>

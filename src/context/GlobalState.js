@@ -11,14 +11,13 @@ const GlobalState = (props) => {
 
     //API chords data
 
-    const getData = async (key, mod) => {
+    const getData = async (key) => {
         setIsLoading(true);
-        await fetch(
-            `https://api.uberchord.com/v1/chords?nameLike=${key}${mod}
-            }`
-        )
+        await fetch(`http://10.1.1.117:3001/${key}`)
             .then((response) => response.json())
-            .then((data) => setData(data))
+            .then((data) => {
+                setData(data);
+            })
             .catch((err) => console.log(err));
         setIsLoading(false);
     };
@@ -27,7 +26,7 @@ const GlobalState = (props) => {
 
     const getLessonsData = async () => {
         setIsLoading(true);
-        await fetch("http://192.168.0.15:3000/levels")
+        await fetch("http://10.1.1.117:3000/levels")
             .then((response) => response.json())
             .then((data) => setLessonsData(data))
             .catch((err) => console.log(err));

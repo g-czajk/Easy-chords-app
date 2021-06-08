@@ -4,7 +4,7 @@ import { TouchableOpacity, Text } from "react-native";
 import styles from "../styles/styles";
 
 const LessonThumbnail = ({ data, navigation }) => {
-    const chords = data.chords.join(", ");
+    const chords = data.shortenedChordNames.join(", ");
 
     const handlePress = () => {
         navigation.navigate("Lesson details", {

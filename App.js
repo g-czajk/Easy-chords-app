@@ -1,12 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import MainNavigation from "./src/routes/MainNavigation";
 import styles from "./src/styles/styles";
 import GlobalState from "./src/context/GlobalState";
-import Context from "./src/context/Context";
 
 const getFonts = () =>
     Font.loadAsync({
@@ -43,4 +42,6 @@ export default function App() {
 }
 
 // json-server --host 192.168.0.15 lessonsDB.json --port 3000
+// json-server --host 10.1.1.117 lessonsDB.json --port 3000
 // json-server --host 192.168.0.15 chordsDB.json --port 3001
+// json-server --host 10.1.1.117 chordsDB.json --port 3001

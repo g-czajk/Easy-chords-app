@@ -14,10 +14,15 @@ const ChordList = ({ data, navigation }) => {
             style={styles.chordList}
             data={data}
             renderItem={renderItem}
-            keyExtractor={(item) => item.chordName}
+            keyExtractor={(item) => item.suffix}
             horizontal={false}
             numColumns={3}
             contentContainerStyle={{ alignItems: "center" }}
+            maxToRenderPerBatch={12}
+            // updateCellsBatchingPeriod={20}
+            initialNumToRender={12}
+            // getItemLayout={getItemLayout}
+            // usunąc flatlisty z nazw akordów
         />
     );
 };

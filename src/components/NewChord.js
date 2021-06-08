@@ -2,30 +2,15 @@ import React, { useEffect } from "react";
 import Chord from "@tombatossals/react-chords/lib/Chord";
 
 import ReactDOMServer from "react-dom/server";
-import Image from "react-native-remote-svg";
+
+import { SvgXml } from "react-native-svg";
 
 const NewChord = ({ data, style }) => {
-    const frets = data.strings.split(" ").map((item) => {
-        if (item === "X") return -1;
-        else return Number(item);
-    });
-
-    const fingers = data.fingering.split(" ").map((item) => {
-        if (item === "X") return 0;
-        else return Number(item);
-    });
-
     // useEffect(() => {
-    //     console.log(fingers);
+    //     console.log(xml);
     // }, []);
 
-    const chord = {
-        frets,
-        fingers,
-        barres: [],
-        capo: false,
-        // baseFret: 3,
-    };
+    const chord = data;
     const instrument = {
         strings: 6,
         fretsOnChord: 4,
@@ -41,14 +26,7 @@ const NewChord = ({ data, style }) => {
         <Chord chord={chord} instrument={instrument} lite={lite} />
     );
 
-    return (
-        <Image
-            source={{
-                uri: `data:image/svg+xml;utf8,${xml}`,
-            }}
-            style={style}
-        />
-    );
+    return <SvgXml xml={xml} width={style.width} height={style.height} />;
 };
 
 export default NewChord;
