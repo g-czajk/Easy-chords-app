@@ -2,7 +2,6 @@ import { StyleSheet, StatusBar, Platform, Dimensions } from "react-native";
 
 export const windowWidth = Dimensions.get("window").width;
 export const windowHeight = Dimensions.get("window").height;
-
 export const background = "#14213d";
 export const font = "nunito-regular";
 export const fontBold = "nunito-bold";
@@ -113,11 +112,15 @@ const styles = StyleSheet.create({
         transform: [{ translateY: 18 }],
     },
     chordDetailsChordName: { flexDirection: "row", flexGrow: 0, flexShrink: 0 },
-    swiper: {
+    slideChordDetails: {
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
     },
-    slide: { flex: 1, justifyContent: "center", alignItems: "center" },
+    slideLessonDetails: {
+        justifyContent: "center",
+        alignItems: "center",
+    },
     buttonWrapper: {
         backgroundColor: "transparent",
         flexDirection: "row",
@@ -216,32 +219,72 @@ const styles = StyleSheet.create({
         fontSize: 11,
         transform: [{ translateY: 6 }],
     },
+    lessonDetailsChordNameLarge: {
+        flexDirection: "row",
+        flexGrow: 0,
+        flexShrink: 0,
+        maxWidth: "80%",
+        marginBottom: 5,
+    },
+    lessonDetailsChordNameKeyLarge: {
+        fontFamily: fontBold,
+        textAlign: "center",
+        fontSize: 22,
+        marginRight: 1,
+        color: green,
+    },
+    lessonDetailsChordNameSuffixLarge: {
+        fontFamily: fontBold,
+        textAlign: "center",
+        fontSize: 15,
+        transform: [{ translateY: 10 }],
+        color: green,
+    },
+    lessonDetailsChordNameNext: {
+        flexDirection: "row",
+        flexGrow: 0,
+        flexShrink: 0,
+        maxWidth: "80%",
+    },
+    lessonDetailsChordNameKeyNext: {
+        fontFamily: fontBold,
+        textAlign: "center",
+        color: green,
+    },
+    lessonDetailsChordNameSuffixNext: {
+        fontFamily: fontBold,
+        textAlign: "center",
+        fontSize: 11,
+        transform: [{ translateY: 6 }],
+        color: green,
+    },
     lessonDetailsLessonTitle: {
         flex: 0.1,
         fontFamily: font,
         fontSize: 32,
         textAlignVertical: "center",
-        backgroundColor: "#aaa",
     },
     progressionContainer: {
         flex: 0.1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#bbb",
     },
-    nowPlayingContainer: {
+    nowPlayContainer: {
         flex: 0.5,
         alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#ccc",
+        justifyContent: "flex-start",
     },
-    nextContainer: {
+    nextChordContainer: {
         flex: 0.3,
         alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#ddd",
+        justifyContent: "flex-start",
     },
-    progressionText: { fontFamily: font, fontSize: 18, textAlign: "center" },
+    progressionText: {
+        marginBottom: 3,
+        fontFamily: font,
+        fontSize: 18,
+        textAlign: "center",
+    },
     progressionChordList: {
         flexDirection: "row",
         justifyContent: "center",
@@ -250,6 +293,21 @@ const styles = StyleSheet.create({
     progressionIconContainer: {
         alignItems: "center",
         justifyContent: "center",
+    },
+    nowPlayText: {
+        marginTop: 25,
+        marginBottom: 5,
+        fontFamily: fontBold,
+        fontSize: 18,
+    },
+    nextChordWrapper: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: 20,
+    },
+    nextChordText: {
+        marginRight: 3,
+        fontFamily: fontBold,
     },
 });
 

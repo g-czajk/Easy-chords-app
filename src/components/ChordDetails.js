@@ -65,7 +65,6 @@ const ChordDetails = (props) => {
             />
             <Swiper
                 containerStyle={{ flex: 0.68 }}
-                style={styles.swiper}
                 showsButtons={true}
                 activeDotColor={background}
                 nextButton={<Text style={styles.buttonText}>›</Text>}
@@ -73,7 +72,10 @@ const ChordDetails = (props) => {
                 buttonWrapperStyle={styles.buttonWrapper}
             >
                 {props.route.params.positions.map((item, index) => (
-                    <View style={styles.slide} key={item.frets.join(",")}>
+                    <View
+                        style={styles.slideChordDetails}
+                        key={item.frets.join(",")}
+                    >
                         <NewChord
                             style={{
                                 width: windowWidth / 1.4,
