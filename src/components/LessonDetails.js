@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
 import styles, {
     background,
     windowWidth,
@@ -11,11 +11,14 @@ import { Ionicons } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
 import { Audio } from "expo-av";
 import { useIsFocused } from "@react-navigation/native";
+import * as FileSystem from "expo-file-system";
 
 const LessonDetails = ({ route }) => {
     const data = route.params.data;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [recording, setRecording] = useState(undefined);
+    const [loudness, setLoudness] = useState(-160);
+    const [prevLoudness, setPrevLoudness] = useState(-160);
     const swiperLarge = useRef(null);
     const swiperSmall = useRef(null);
     const isFocused = useIsFocused();
@@ -50,9 +53,10 @@ const LessonDetails = ({ route }) => {
     });
 
     const statusCallback = async () => {
-        await recording
-            .getStatusAsync()
-            .then((status) => console.log(status.metering));
+        await recording.getStatusAsync().then((status) => {
+            // console.log(status.metering);
+            setLoudness(status.metering);
+        });
     };
 
     const startRecording = async () => {
@@ -84,6 +88,11 @@ const LessonDetails = ({ route }) => {
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI();
         console.log("Recording stopped and stored at", uri);
+        FileSystem.deleteAsync(uri)
+            .then(() => {
+                console.log("Deleted", uri);
+            })
+            .catch((err) => console.log(err));
     };
 
     useEffect(() => {
@@ -100,23 +109,27 @@ const LessonDetails = ({ route }) => {
         if (recording) {
             interval = setInterval(() => {
                 statusCallback();
-            }, 200);
+            }, 1000);
         }
         return () => {
             clearInterval(interval);
         };
     }, [recording, isFocused]);
 
+    useEffect(() => {
+        // console.log("loudness:", loudness);
+        // console.log("prevLoudness", prevLoudness);
+        if (loudness > -50 && loudness < prevLoudness) {
+            swiperLarge.current.scrollBy(1);
+            setPrevLoudness(-160);
+            return;
+        }
+        setPrevLoudness(loudness);
+    }, [loudness]);
+
     return (
         <View style={styles.lessonDetails}>
             <Text style={styles.lessonDetailsLessonTitle}>{data.title}</Text>
-            <Button
-                title="click"
-                onPress={() => {
-                    stopRecording();
-                    // swiperLarge.current.scrollBy(1);
-                }}
-            />
             <View style={styles.progressionContainer}>
                 <Text style={styles.progressionText}>progression:</Text>
                 <View style={styles.progressionChordList}>
