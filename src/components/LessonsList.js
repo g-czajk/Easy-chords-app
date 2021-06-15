@@ -12,10 +12,6 @@ const LessonsList = ({ route, navigation }) => {
         />
     );
 
-    // useEffect(() => {
-    //     console.log(props);
-    // }, []);
-
     return (
         <FlatList
             style={styles.lessonsList}

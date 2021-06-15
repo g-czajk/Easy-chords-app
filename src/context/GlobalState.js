@@ -13,10 +13,10 @@ const GlobalState = (props) => {
 
     const getData = async (key) => {
         setIsLoading(true);
-        await fetch(`http://192.168.0.15:3001/${key}`)
+        await fetch(`https://easy-chords.vercel.app/api/chords?key=${key}`)
             .then((response) => response.json())
             .then((data) => {
-                setData(data);
+                setData(data.chord);
             })
             .catch((err) => console.log(err));
         setIsLoading(false);
@@ -26,9 +26,9 @@ const GlobalState = (props) => {
 
     const getLessonsData = async () => {
         setIsLoading(true);
-        await fetch("http://192.168.0.15:3000/levels")
+        await fetch("https://easy-chords.vercel.app/api/lessons")
             .then((response) => response.json())
-            .then((data) => setLessonsData(data))
+            .then((data) => setLessonsData(data.levels))
             .catch((err) => console.log(err));
         setIsLoading(false);
     };

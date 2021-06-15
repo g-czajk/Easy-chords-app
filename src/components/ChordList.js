@@ -18,11 +18,8 @@ const ChordList = ({ data, navigation }) => {
             horizontal={false}
             numColumns={3}
             contentContainerStyle={{ alignItems: "center" }}
-            maxToRenderPerBatch={12}
-            // updateCellsBatchingPeriod={20}
-            initialNumToRender={12}
-            // getItemLayout={getItemLayout}
-            // usunąc flatlisty z nazw akordów
+            maxToRenderPerBatch={8}
+            initialNumToRender={4}
         />
     );
 };

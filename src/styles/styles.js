@@ -309,6 +309,11 @@ const styles = StyleSheet.create({
         marginRight: 3,
         fontFamily: fontBold,
     },
+    soundLevelIndicator: {
+        position: "absolute",
+        bottom: "5%",
+        right: "5%",
+    },
 });
 
 export default styles;

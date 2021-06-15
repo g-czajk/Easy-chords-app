@@ -230,6 +230,13 @@ const LessonDetails = ({ route }) => {
                         ))}
                     </Swiper>
                 </View>
+                <View style={styles.soundLevelIndicator}>
+                    {loudness > -50 ? (
+                        <Ionicons name="mic" size={36} color="#444" />
+                    ) : (
+                        <Ionicons name="mic-outline" size={36} color="#bbb" />
+                    )}
+                </View>
             </View>
         </View>
     );
