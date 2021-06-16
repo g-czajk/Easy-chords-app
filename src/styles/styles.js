@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
     },
     chordDetailsChordNameKey: {
         marginRight: 2,
-        marginBottom: 6,
         fontFamily: fontBold,
         fontSize: 36,
     },
@@ -116,10 +115,18 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        transform: [{ translateX: 4 }],
     },
-    slideLessonDetails: {
+    slideLessonDetailsLarge: {
         justifyContent: "center",
         alignItems: "center",
+        transform: [{ translateX: 4 }],
+    },
+    slideLessonDetailsSmall: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        transform: [{ translateX: 4 }],
     },
     buttonWrapper: {
         backgroundColor: "transparent",
@@ -296,7 +303,7 @@ const styles = StyleSheet.create({
     },
     nowPlayText: {
         marginTop: 25,
-        marginBottom: 5,
+        marginBottom: 10,
         fontFamily: fontBold,
         fontSize: 18,
     },

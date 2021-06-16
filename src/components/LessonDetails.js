@@ -88,7 +88,7 @@ const LessonDetails = ({ route }) => {
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI();
         console.log("Recording stopped and stored at", uri);
-        FileSystem.deleteAsync(uri)
+        await FileSystem.deleteAsync(uri)
             .then(() => {
                 console.log("Deleted", uri);
             })
@@ -164,7 +164,7 @@ const LessonDetails = ({ route }) => {
                     >
                         {data.progression.map((item, index) => (
                             <View
-                                style={styles.slideLessonDetails}
+                                style={styles.slideLessonDetailsLarge}
                                 key={item.scheme.frets.join(",")}
                             >
                                 <NewChord
@@ -216,7 +216,7 @@ const LessonDetails = ({ route }) => {
                     >
                         {data.progression.map((item, index) => (
                             <View
-                                style={styles.slideChordDetails}
+                                style={styles.slideLessonDetailsSmall}
                                 key={item.scheme.frets.join(",")}
                             >
                                 <NewChord
