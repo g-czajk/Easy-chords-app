@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import styles, {
     background,
     windowWidth,
@@ -12,6 +12,7 @@ import Swiper from "react-native-swiper";
 import { Audio } from "expo-av";
 import { useIsFocused } from "@react-navigation/native";
 import * as FileSystem from "expo-file-system";
+import Slider from "@react-native-community/slider";
 
 const LessonDetails = ({ route }) => {
     const data = route.params.data;
@@ -19,12 +20,18 @@ const LessonDetails = ({ route }) => {
     const [recording, setRecording] = useState(undefined);
     const [loudness, setLoudness] = useState(-160);
     const [prevLoudness, setPrevLoudness] = useState(-160);
+    const [loudnessControl, setLoudnessControl] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
     const swiperLarge = useRef(null);
     const swiperSmall = useRef(null);
     const isFocused = useIsFocused();
 
     const updateCurrentIndex = (index) => {
         setCurrentIndex(index);
+    };
+
+    const updateLoudnessControl = (value) => {
+        setLoudnessControl(value);
     };
 
     const progressionChordNames = data.progression.map((item, index) => {
@@ -119,7 +126,7 @@ const LessonDetails = ({ route }) => {
     useEffect(() => {
         // console.log("loudness:", loudness);
         // console.log("prevLoudness", prevLoudness);
-        if (loudness > -50 && loudness < prevLoudness) {
+        if (loudness > -60 - loudnessControl && loudness < prevLoudness) {
             swiperLarge.current.scrollBy(1);
             setPrevLoudness(-160);
             return;
@@ -231,11 +238,41 @@ const LessonDetails = ({ route }) => {
                     </Swiper>
                 </View>
                 <View style={styles.soundLevelIndicator}>
-                    {loudness > -50 ? (
-                        <Ionicons name="mic" size={36} color="#444" />
-                    ) : (
-                        <Ionicons name="mic-outline" size={36} color="#bbb" />
+                    {isVisible && (
+                        <Text style={styles.loudnessControlText}>
+                            {loudnessControl}
+                        </Text>
                     )}
+                    {isVisible && (
+                        <Slider
+                            style={styles.slider}
+                            minimumValue={-20}
+                            maximumValue={20}
+                            minimumTrackTintColor="#777"
+                            maximumTrackTintColor="ccc"
+                            thumbTintColor={background}
+                            value={loudnessControl}
+                            step={2}
+                            onValueChange={(value) => {
+                                updateLoudnessControl(value);
+                            }}
+                        />
+                    )}
+                    <TouchableOpacity
+                        onPress={() => {
+                            setIsVisible((prev) => !prev);
+                        }}
+                    >
+                        {loudness > -60 - loudnessControl ? (
+                            <Ionicons name="mic" size={36} color="#444" />
+                        ) : (
+                            <Ionicons
+                                name="mic-outline"
+                                size={36}
+                                color="#bbb"
+                            />
+                        )}
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>

@@ -14,12 +14,12 @@ const ChordList = ({ data, navigation }) => {
             style={styles.chordList}
             data={data}
             renderItem={renderItem}
-            keyExtractor={(item) => item.suffix}
+            keyExtractor={(item) => `${item.key},${item.suffix}`}
             horizontal={false}
             numColumns={3}
             contentContainerStyle={{ alignItems: "center" }}
             maxToRenderPerBatch={8}
-            initialNumToRender={4}
+            initialNumToRender={8}
         />
     );
 };

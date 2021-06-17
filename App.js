@@ -18,7 +18,7 @@ export default function App() {
     const [appLoaded, setAppLoaded] = useState(false);
 
     const loadApp = async () => {
-        await getFonts(); // await getStorageData();
+        await getFonts();
     };
 
     if (appLoaded) {
@@ -40,8 +40,3 @@ export default function App() {
         );
     }
 }
-
-// json-server --host 192.168.0.15 lessonsDB.json --port 3000
-// json-server --host 10.1.1.117 lessonsDB.json --port 3000
-// json-server --host 192.168.0.15 chordsDB.json --port 3001
-// json-server --host 10.1.1.117 chordsDB.json --port 3001

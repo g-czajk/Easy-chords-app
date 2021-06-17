@@ -1,12 +1,37 @@
 import React, { useEffect, useContext } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator, BackHandler } from "react-native";
 import ChordList from "../components/ChordList";
 import Context from "../context/Context";
 import styles, { background } from "../styles/styles";
+import { useFocusEffect } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 
 const FavouritesScreen = ({ navigation }) => {
     const { storageData, storageKeys, getStorageData, isLoading } =
         useContext(Context);
+
+    const route = useRoute();
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const onBackPress = () => {
+                if ((route.name = "Favourite chords")) {
+                    BackHandler.exitApp();
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+
+            BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+            return () =>
+                BackHandler.removeEventListener(
+                    "hardwareBackPress",
+                    onBackPress
+                );
+        }, [route.name])
+    );
 
     useEffect(() => {
         getStorageData();

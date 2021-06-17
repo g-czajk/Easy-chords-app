@@ -4,12 +4,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GlobalState = (props) => {
     const [data, setData] = useState([]);
+    const [basicChordsData, setBasicChordsData] = useState([]);
     const [lessonsData, setLessonsData] = useState([]);
     const [storageData, setStorageData] = useState([]);
     const [storageKeys, setStorageKeys] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    //API chords data
+    //all chords data
 
     const getData = async (key) => {
         setIsLoading(true);
@@ -20,6 +21,17 @@ const GlobalState = (props) => {
             })
             .catch((err) => console.log(err));
         setIsLoading(false);
+    };
+
+    // basic chords data
+
+    const getBasicChordsData = async () => {
+        await fetch(`https://easy-chords.vercel.app/api/basic`)
+            .then((response) => response.json())
+            .then((data) => {
+                setBasicChordsData(data.chord);
+            })
+            .catch((err) => console.log(err));
     };
 
     // API lessons data
@@ -75,11 +87,13 @@ const GlobalState = (props) => {
         <Context.Provider
             value={{
                 data,
+                basicChordsData,
                 lessonsData,
                 storageData,
                 storageKeys,
                 isLoading,
                 getData,
+                getBasicChordsData,
                 getLessonsData,
                 getStorageData,
                 setAllStorageKeys,
