@@ -16,11 +16,9 @@ Then, go to [this link](https://expo.io/@vinxu77/easy-chords) and follow the ins
 
 The app will ask you to allow microphone recording in the tutorial screen. You need to allow it to make the tutorial work properly, as in the tutorial screen the app measures the input sound level to determine whether to automatically skip between the chords (works best if you try it with a guitar).
 
-A quick demonstration:
+Some screenshots:
 
-![image showing the application's user interface](./pictures/screen_1.png)
-![image showing the application's user interface](./pictures/screen_2.png)
-![image showing the application's user interface](./pictures/screen_3.png)
+![image showing the application's user interface](./pictures/screen.png)
 
 ## Aplikacja "Easy chords"
 
