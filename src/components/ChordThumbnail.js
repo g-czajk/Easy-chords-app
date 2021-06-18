@@ -3,7 +3,6 @@ import { TouchableOpacity } from "react-native";
 import styles, { windowWidth, windowHeight } from "../styles/styles";
 import NewChord from "./NewChord";
 import { useRoute } from "@react-navigation/native";
-
 import ChordNameComponent from "./ChordNameComponent";
 
 const ChordThumbnail = ({ data, navigation }) => {

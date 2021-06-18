@@ -1,15 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Chord from "@tombatossals/react-chords/lib/Chord";
-
 import ReactDOMServer from "react-dom/server";
-
 import { SvgXml } from "react-native-svg";
 
 const NewChord = ({ data, style }) => {
-    // useEffect(() => {
-    //     console.log(xml);
-    // }, []);
-
     const chord = data;
     const instrument = {
         strings: 6,
@@ -20,7 +14,7 @@ const NewChord = ({ data, style }) => {
             standard: ["E", "A", "D", "G", "B", "E"],
         },
     };
-    const lite = false; // defaults to false if omitted
+    const lite = false;
 
     const xml = ReactDOMServer.renderToStaticMarkup(
         <Chord chord={chord} instrument={instrument} lite={lite} />

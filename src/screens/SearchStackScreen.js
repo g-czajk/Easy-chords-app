@@ -1,9 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import SearchScreen from "./SearchScreen";
 import ChordDetails from "../components/ChordDetails";
-
 import { background, font } from "../styles/styles";
 
 const SearchStackScreen = () => {

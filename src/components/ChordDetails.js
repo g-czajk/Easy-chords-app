@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import styles, {
     windowWidth,
     windowHeight,
@@ -15,15 +15,12 @@ import Context from "../context/Context";
 import Swiper from "react-native-swiper";
 
 const ChordDetails = (props) => {
-    // storage save/delete
-
     const { storageKeys, setAllStorageKeys } = useContext(Context);
 
     const saveData = async (data) => {
         try {
             const jsonValue = JSON.stringify(data);
             await AsyncStorage.setItem(`${data.key}${data.suffix}`, jsonValue);
-            // console.log(`${jsonValue} stored as "${data.key}${data.suffix}"`);
         } catch (e) {
             console.log(e);
         }
@@ -32,7 +29,6 @@ const ChordDetails = (props) => {
     const removeValue = async (item) => {
         try {
             await AsyncStorage.removeItem(`${item}`);
-            // console.log(`${item} removed`);
         } catch (e) {
             console.log(e);
         }

@@ -13,6 +13,7 @@ import { Audio } from "expo-av";
 import { useIsFocused } from "@react-navigation/native";
 import * as FileSystem from "expo-file-system";
 import Slider from "@react-native-community/slider";
+import { useKeepAwake } from "expo-keep-awake";
 
 const LessonDetails = ({ route }) => {
     const data = route.params.data;
@@ -20,18 +21,20 @@ const LessonDetails = ({ route }) => {
     const [recording, setRecording] = useState(undefined);
     const [loudness, setLoudness] = useState(-160);
     const [prevLoudness, setPrevLoudness] = useState(-160);
-    const [loudnessControl, setLoudnessControl] = useState(0);
+    const [micSensitivityControl, setMicSensitivityControl] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const swiperLarge = useRef(null);
     const swiperSmall = useRef(null);
     const isFocused = useIsFocused();
 
+    useKeepAwake();
+
     const updateCurrentIndex = (index) => {
         setCurrentIndex(index);
     };
 
-    const updateLoudnessControl = (value) => {
-        setLoudnessControl(value);
+    const updateMicSensitivityControl = (value) => {
+        setMicSensitivityControl(value);
     };
 
     const progressionChordNames = data.progression.map((item, index) => {
@@ -61,7 +64,6 @@ const LessonDetails = ({ route }) => {
 
     const statusCallback = async () => {
         await recording.getStatusAsync().then((status) => {
-            // console.log(status.metering);
             setLoudness(status.metering);
         });
     };
@@ -79,8 +81,6 @@ const LessonDetails = ({ route }) => {
             await recording.prepareToRecordAsync(
                 Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY
             );
-            // recording.setOnRecordingStatusUpdate(statusCallback);
-            // recording.setProgressUpdateInterval(2000);
             await recording.startAsync();
             setRecording(recording);
             console.log("Recording started");
@@ -124,9 +124,7 @@ const LessonDetails = ({ route }) => {
     }, [recording, isFocused]);
 
     useEffect(() => {
-        // console.log("loudness:", loudness);
-        // console.log("prevLoudness", prevLoudness);
-        if (loudness > -60 - loudnessControl && loudness < prevLoudness) {
+        if (loudness > -60 - micSensitivityControl && loudness < prevLoudness) {
             swiperLarge.current.scrollBy(1);
             setPrevLoudness(-160);
             return;
@@ -239,8 +237,8 @@ const LessonDetails = ({ route }) => {
                 </View>
                 <View style={styles.soundLevelIndicator}>
                     {isVisible && (
-                        <Text style={styles.loudnessControlText}>
-                            {loudnessControl}
+                        <Text style={styles.micSensitivityControlText}>
+                            {micSensitivityControl}
                         </Text>
                     )}
                     {isVisible && (
@@ -251,10 +249,10 @@ const LessonDetails = ({ route }) => {
                             minimumTrackTintColor="#777"
                             maximumTrackTintColor="ccc"
                             thumbTintColor={background}
-                            value={loudnessControl}
+                            value={micSensitivityControl}
                             step={2}
                             onValueChange={(value) => {
-                                updateLoudnessControl(value);
+                                updateMicSensitivityControl(value);
                             }}
                         />
                     )}
@@ -263,7 +261,7 @@ const LessonDetails = ({ route }) => {
                             setIsVisible((prev) => !prev);
                         }}
                     >
-                        {loudness > -60 - loudnessControl ? (
+                        {loudness > -60 - micSensitivityControl ? (
                             <Ionicons name="mic" size={36} color="#444" />
                         ) : (
                             <Ionicons

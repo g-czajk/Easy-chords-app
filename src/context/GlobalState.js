@@ -10,7 +10,7 @@ const GlobalState = (props) => {
     const [storageKeys, setStorageKeys] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    //all chords data
+    // all chords data
 
     const getData = async (key) => {
         setIsLoading(true);
@@ -34,7 +34,7 @@ const GlobalState = (props) => {
             .catch((err) => console.log(err));
     };
 
-    // API lessons data
+    // lessons data
 
     const getLessonsData = async () => {
         setIsLoading(true);

@@ -1,6 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import LearnScreen from "./LearnScreen";
 import LessonsList from "../components/LessonsList";
 import LessonDetails from "../components/LessonDetails";

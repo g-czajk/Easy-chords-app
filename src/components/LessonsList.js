@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FlatList } from "react-native";
-
 import styles from "../styles/styles";
 import LessonThumbnail from "./LessonThumbnail";
 

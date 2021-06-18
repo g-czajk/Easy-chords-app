@@ -356,7 +356,7 @@ const styles = StyleSheet.create({
         height: 40,
         transform: [{ rotate: "-90deg" }],
     },
-    loudnessControlText: {
+    micSensitivityControlText: {
         position: "absolute",
         top: "-320%",
         fontFamily: fontBold,
