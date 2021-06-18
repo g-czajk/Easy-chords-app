@@ -12,7 +12,7 @@ I've also made a simple API to get the data from the database (it uses serverles
 
 To preview the app you need to download [Expo](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pl&gl=US) app from Google Play Store.
 
-Then, go to [this link](https://expo.io/@vinxu77/easy-chords) and follow the instructions.
+Then, go to [this link](https://expo.io/@g-czajk/easy-chords) and follow the instructions.
 
 The app will ask you to allow microphone recording in the tutorial screen. You need to allow it to make the tutorial work properly, as in the tutorial screen the app measures the input sound level to determine whether to automatically skip between the chords (works best if you try it with a guitar).
 
