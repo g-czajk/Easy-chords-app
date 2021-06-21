@@ -2,7 +2,7 @@
 
 An Android app made in React Native, according to my own idea.
 
-It allows searching for guitar chords in a huge chords database and it includes a tutorial for beginner guitar players (I've created the content of the tutorial myself as well).
+It allows searching for guitar chords in a huge chords database and it includes a tutorial for beginner guitar players (I've created the content of the tutorial myself as well, more lessons coming soon).
 
 The chords database comes from [this](https://github.com/tombatossals/chords-db) repository (I've just put the data into MongoDB Atlas).
 
@@ -24,7 +24,7 @@ Some screenshots:
 
 Aplikacja na Android stworzona w React Native według własnego pomysłu.
 
-Umożliwia wyszukiwanie akordów gitarowych w sporej bazie danych akordów oraz zawiera samouczek dla początkujących gitarzystów (treść samouczka również przygotowałem we własnym zakresie).
+Umożliwia wyszukiwanie akordów gitarowych w sporej bazie danych akordów oraz zawiera samouczek dla początkujących gitarzystów (treść samouczka również przygotowałem we własnym zakresie, wkrótce dodam więcej lekcji).
 
 Baza danych akordów pochodzi z [tego](https://github.com/tombatossals/chords-db) repozytorium (umieściłem tę bazę w MongoDB Atlas).
 
