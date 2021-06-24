@@ -26,7 +26,8 @@
       },
       "permissions": [
         "RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.easychords"
     },
     "web": {
       "favicon": "./assets/favicon.png"
